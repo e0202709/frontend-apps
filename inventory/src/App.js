@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SearchBar from "./components/SearchBar";
 import ItemsDisplay from "./components/ItemsDisplay";
 import AddItem from "./components/AddItem";
@@ -36,6 +36,22 @@ function App() {
   const updateFilters = (searchParams) => {
     setFilters(searchParams);
   };
+
+  const deleteItem = useCallback((item)=> {
+    const items = data["items"]
+    const requestOptions = {
+      method: "DELETE"
+    }
+    fetch(`http://localhost:9000/items/${item.id}`, requestOptions).then(
+    (response) => {
+      if(response.ok) {
+        const idx = items.indexOf(item)
+        items.splice(idx, 1)
+        setData({items: items})
+      }
+    }
+    )
+  },  [data])
 
   const addItemToData = (item) => {
     let itemsValue = data["items"];
@@ -79,7 +95,7 @@ function App() {
           <SearchBar updateSearchParams={updateFilters} />
         </div>
         <div className="row mt-3">
-          <ItemsDisplay items={filterData(data["items"])} />
+         <ItemsDisplay items={filterData(data["items"])} deleteItem={deleteItem}/>
         </div>
         <div className="row mt-3">
           <AddItem addItem={addItemToData} />

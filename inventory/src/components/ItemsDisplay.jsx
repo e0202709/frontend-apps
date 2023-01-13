@@ -14,7 +14,13 @@ const StyledParagraph = styled.p`
   background-color: ${(props) => (props.color ? props.color : "white")};
 `;
 
+
 function ItemsDisplay(props) {
+
+const deleteItem = (item) => {
+    props.deleteItem(item)
+} 
+    
   const showItem = (item) => {
     return (
       <tr>
@@ -34,6 +40,11 @@ function ItemsDisplay(props) {
         <th key="brand" scope="row">
           {displayData(item, "brand")}
         </th>
+        <td>
+            <button className="btn btn-danger" onClick={() => deleteItem(item)}>
+                Delete
+            </button>
+        </td>
         {/* </StyledParagraph> */}
       </tr>
     );
