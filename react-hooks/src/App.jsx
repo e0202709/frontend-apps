@@ -2,6 +2,11 @@ import './App.css';
 import { useState, useEffect, useMemo, useCallback } from "react"; 
 import Fibonacci from './components/Fibonacci';
 import UseReducerExample from './components/UseReducerExample';
+import NoTransition from './components/UseDeferredValueExample';
+import SearchBar from './components/SearchBar';
+import FormInput from './components/FormInput';
+import Video from './components/Video';
+import PreviousPrice from './components/PreviousPrice';
 
 
 function App() { 
@@ -12,7 +17,8 @@ function App() {
  
     return ( 
         <main className='App'> 
-            <Fibonacci userNumber={userNumber} setUserNumber={setUserNumber}/>
+        <PreviousPrice />
+            {/* <Fibonacci userNumber={userNumber} setUserNumber={setUserNumber}/>
  
             <label>Random Input:</label> 
             <input 
@@ -22,7 +28,7 @@ function App() {
                 onChange={(e) => setRandomInput(e.target.value)} 
             /> 
             <p>{randomInput}</p> 
-            <UseReducerExample/>
+            <UseReducerExample/> */}
         </main> 
     ); 
 } 
