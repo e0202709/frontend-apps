@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "name": "max",
+      "price": "30",
+      "type": "human",
+      "brand": "english",
+      "id": 1
+    }
+  ]
+}

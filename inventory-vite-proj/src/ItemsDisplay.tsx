@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 // a regular function, doesn't have "this" scope
-function displayData(dictionary, key) {
+function displayData(dictionary:{[key: string]: any}, key:string) {
   if (key in dictionary) {
     if (dictionary[key] === "") return "N/A";
     else return dictionary[key];
@@ -14,8 +14,25 @@ const StyledParagraph = styled.p`
   background-color: ${(props) => (props.color ? props.color : "white")};
 `;
 
-function ItemsDisplay(props) {
-  const showItem = (item) => {
+type DisplayItemProps = {
+  deleteItem: ([]) => void;
+  items: [],
+  // children: ReactNode;
+};
+
+// interface DeleteItemInterface {
+//   name: string;
+//   price: number;
+//   type: string;
+//   brand: string;
+// }
+function ItemsDisplay(props: DisplayItemProps) {
+
+const deleteItem = (item: []) => {
+    props.deleteItem(item)
+} 
+    
+  const showItem = (item: []) => {
     return (
       <tr>
         {/* <StyledParagraph> */}
@@ -34,6 +51,11 @@ function ItemsDisplay(props) {
         <th key="brand" scope="row">
           {displayData(item, "brand")}
         </th>
+        <td>
+            <button className="btn btn-danger" onClick={() => deleteItem(item)}>
+                Delete
+            </button>
+        </td>
         {/* </StyledParagraph> */}
       </tr>
     );
